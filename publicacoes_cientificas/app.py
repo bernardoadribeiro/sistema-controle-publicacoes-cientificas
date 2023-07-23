@@ -1,14 +1,20 @@
 from flask import Flask
+from flask_migrate import Migrate
+
 from decouple import config
 
-from .routes import index, publicacoes
+from publicacoes_cientificas import database
+from publicacoes_cientificas.routes import index, publicacoes
+
 
 app = Flask(__name__)
 
 app.secret_key = config('SECRET_KEY')
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{config.DB_USER}:{config.DB_PASSWORD}@{config.DB_HOST}/{config.DB_NAME}'
-# app.config['SQLALCHEMY_ECHO'] = config('SQLALCHEMY_ECHO')
+# Inicializa o Banco de Dados
+db = database.init_database(app)
+database.load_models()
+migrate = Migrate(app, db, directory='./publicacoes_cientificas/migrations')
 
 
 # Start app

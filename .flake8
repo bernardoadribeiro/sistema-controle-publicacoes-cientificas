@@ -6,8 +6,4 @@ exclude =
 max-line-length = 100
 
 per-file-ignores =
-    # imported but unused
-    database.py: F401, E402
-
-    # max line length
-    app.py: E501
+    database.py: F401, E402, E501
