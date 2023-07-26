@@ -1,5 +1,6 @@
-import datetime
-from publicacoes_cientificas.app import db, tz
+from datetime import datetime
+from publicacoes_cientificas.app import db
+from publicacoes_cientificas.database import tz
 
 
 class Publicacoes(db.Model):

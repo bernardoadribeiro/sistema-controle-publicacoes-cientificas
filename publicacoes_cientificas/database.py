@@ -1,5 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+
 from decouple import config
+import pytz
+
+
+# Default DB Timezone
+tz = pytz.timezone('America/Sao_Paulo')
 
 
 def init_database(app):

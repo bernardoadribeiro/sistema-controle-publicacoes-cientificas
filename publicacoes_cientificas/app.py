@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 
 from decouple import config
-import pytz
 
 from publicacoes_cientificas import database
 from publicacoes_cientificas.routes import index, publicacoes
@@ -16,9 +15,6 @@ app.secret_key = config('SECRET_KEY')
 db = database.init_database(app)
 database.load_models()
 migrate = Migrate(app, db, directory='./publicacoes_cientificas/migrations')
-
-# Default Timezone
-tz = pytz.timezone('America/Sao_Paulo')
 
 
 # Start app
