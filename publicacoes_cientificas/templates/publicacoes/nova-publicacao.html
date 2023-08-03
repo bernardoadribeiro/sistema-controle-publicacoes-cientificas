@@ -6,9 +6,64 @@
 {% block page_content %}
 
 <div class="container">
-    <h1> Nova publicação </h1>
+    <h1>Nova publicação</h1>
 
-    
+    <form>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="mb-3">
+            <label for="autor_principal" class="form-label">Autor Principal</label>
+            <input type="text" class="form-control" id="autor_principal" name="autor_principal" required>
+        </div>
+        <div class="mb-3">
+            <label for="orientador" class="form-label">Orientador</label>
+            <input type="text" class="form-control" id="orientador" name="orientador">
+        </div>
+        <div class="mb-3">
+            <label for="coorientador" class="form-label">Coorientador</label>
+            <input type="text" class="form-control" id="coorientador" name="coorientador">
+        </div>
+        <div class="mb-3">
+            <label for="citacao" class="form-label">Citação</label>
+            <input type="text" class="form-control" id="citacao" name="citacao">
+        </div>
+        <div class="mb-3">
+            <label for="url" class="form-label">URL</label>
+            <input type="url" class="form-control" id="url" name="url">
+        </div>
+        <div class="mb-3">
+            <label for="resumo" class="form-label">Resumo</label>
+            <textarea class="form-control" id="resumo" name="resumo" rows="5" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="abstract" class="form-label">Abstract</label>
+            <textarea class="form-control" id="abstract" name="abstract" rows="5" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="lingua" class="form-label">Língua</label>
+            <input type="text" class="form-control" id="lingua" name="lingua" required>
+        </div>
+        <div class="mb-3">
+            <label for="pub_tipo" class="form-label">Tipo de Publicação</label>
+            <input type="text" class="form-control" id="pub_tipo" name="pub_tipo" required>
+        </div>
+        <div class="mb-3">
+            <label for="colecao" class="form-label">Coleção</label>
+            <input type="text" class="form-control" id="colecao" name="colecao">
+        </div>
+        <div class="mb-3">
+            <label for="curso" class="form-label">Curso</label>
+            <input type="text" class="form-control" id="curso" name="curso">
+        </div>
+        <div class="mb-3">
+            <label for="qtd_paginas" class="form-label">Quantidade de Páginas</label>
+            <input type="number" class="form-control" id="qtd_paginas" name="qtd_paginas">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Publicar</button>
+    </form>
 </div>
 
 {% endblock %}
