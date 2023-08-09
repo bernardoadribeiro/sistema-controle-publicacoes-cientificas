@@ -7,3 +7,4 @@ max-line-length = 100
 
 per-file-ignores =
     database.py: F401, E402, E501
+    app.py: F401, E402, E501
