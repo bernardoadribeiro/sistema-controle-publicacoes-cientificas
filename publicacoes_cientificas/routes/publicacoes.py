@@ -1,15 +1,21 @@
 from flask import Blueprint, render_template, request, flash
 
+from publicacoes_cientificas.models.Publicacoes import Publicacoes
+
+from publicacoes_cientificas.app import db
+
 
 publicacoes_bp = Blueprint(
     'publicacoes', __name__,
     template_folder='templates'
 )
 
+
 @publicacoes_bp.route('/')
 def listar_publicacoes():
     publicacoes = Publicacoes.query.all()
     return render_template('listar_publicacoes.html', publicacoes=publicacoes)
+
 
 @publicacoes_bp.route('nova-publicacao/', methods=['GET', 'POST'])
 def nova_publicacao():
@@ -55,22 +61,22 @@ def nova_publicacao():
         db.session.commit()
 
         flash('Publicação created!', category='success')
-        
-        #return redirect(url_for('webui.listar_publicacoes'))
-        #pass
 
     return render_template('publicacoes/nova-publicacao.html')
+
 
 @publicacoes_bp.route('/publicacao/<int:publicacao_id>')
 def ver_publicacao(publicacao_id):
     publicacao = Publicacoes.query.get_or_404(publicacao_id)
-    #return render_template('ver_publicacao.html', publicacao=publicacao)
 
-@publicacoes_bp.route('/publicacao/<int:publicacao_id>/editar', methods=['GET', 'POST'])
+    return render_template('ver_publicacao.html', publicacao=publicacao)
+
+
+@publicacoes_bp.route('/publicacao/<int:publicacao_id>/editar', methods=['GET', 'PATCH'])
 def editar_publicacao(publicacao_id):
     publicacao = Publicacoes.query.get_or_404(publicacao_id)
 
-    if request.method == 'POST':
+    if request.method == 'PATCH':
         publicacao.titulo = request.form['titulo']
         publicacao.autor_principal = request.form['autor_principal']
         publicacao.orientador = request.form['orientador']
@@ -88,13 +94,14 @@ def editar_publicacao(publicacao_id):
         publicacao.qtd_paginas = request.form['qtd_paginas']
 
         db.session.commit()
-        #return redirect(url_for('webui.ver_publicacao', publicacao_id=publicacao_id))
 
-    #return render_template('editar_publicacao.html', publicacao=publicacao)
+    render_template('ver_publicacao.html', publicacao=publicacao)
+
 
 @publicacoes_bp.route('/publicacao/<int:publicacao_id>/excluir', methods=['POST'])
 def excluir_publicacao(publicacao_id):
     publicacao = Publicacoes.query.get_or_404(publicacao_id)
     db.session.delete(publicacao)
     db.session.commit()
-    #return redirect(url_for('webui.listar_publicacoes'))
+
+    return render_template('publicacoes/index.html')
