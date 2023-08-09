@@ -19,7 +19,3 @@ def init_database(app):
     db.init_app(app)
 
     return db
-
-
-def load_models():
-    from .models import Publicacoes
