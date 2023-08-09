@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block page_title %} Publicações {% endblock %}
+
+<!-- Conteudo da pagina -->
+{% block page_content %}
+<main>
+    <div class="container">
+
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class=""> Publicações </h1>
+                    <p></p>
+                </div>
+            </div>
+        </section>
+    
+        <div class="container">
+            
+            <div class="d-flex justify-content-between">
+                <h2>Publicações registradas</h2>
+                
+                <a href="nova-publicacao/" class="btn btn-success my-2">Nova publicações</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Orientador</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Tipo de publicação</th>
+                            <th scope="col">Campus IFNMG</th>
+                            <th scope="col">Curso</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for publicacao in publicacoes %}
+                        
+                            <tr>
+                                <th scope="row"> {{ publicacao.id}} </th>
+                                <td> {{ publicacao.titulo}} </th>
+                                <td> {{ publicacao.autor_principal}} </th>
+                                <td> {{ publicacao.orientador}} </th>
+                                <td> <a href="{{ publicacao.url }}" target="_blank">{{ publicacao.url }}</a></td>
+                                <td> {{ publicacao.pub_tipo }} </td>
+                                <td> {{ publicacao.ifnmg_campus }} </td>
+                                <td> {{ publicacao.curso }} </td>
+                            </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}

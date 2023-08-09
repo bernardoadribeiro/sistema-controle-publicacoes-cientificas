@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, redirect, render_template, request, flash
 
 
 publicacoes_bp = Blueprint(
@@ -7,15 +7,20 @@ publicacoes_bp = Blueprint(
 )
 
 
-# @publicacoes_bp.route('/')
-# def listar_publicacoes():
-#     publicacoes = Publicacoes.query.all()
-#     return render_template('listar_publicacoes.html', publicacoes=publicacoes)
+@publicacoes_bp.route('/')
+def listar_publicacoes():
+    from ..models.Publicacoes import Publicacoes
+
+    publicacoes = Publicacoes.query.all()
+    return render_template('publicacoes/index.html', publicacoes=publicacoes)
 
 
 @publicacoes_bp.route('nova-publicacao/', methods=['GET', 'POST'])
 def nova_publicacao():
     """ Formulario para insercao de nova publicacao """
+
+    if request.method == 'GET':
+        return render_template('publicacoes/nova-publicacao.html')
 
     if request.method == 'POST':
         # insere nova publicacao [TO-DO]
@@ -58,6 +63,8 @@ def nova_publicacao():
         db.session.commit()
 
         flash('Publicação created!', category='success')
+
+        return redirect('/publicacoes')
 
     return render_template('publicacoes/nova-publicacao.html')
 
